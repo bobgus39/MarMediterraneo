@@ -7,7 +7,7 @@ const contactCards = [
   {
     icon: MapPin,
     title: 'Dirección',
-    lines: ['Passeig del Mar Mediterrani, 42', 'Barcelona, 08003'],
+    lines: ['C. Pintor Cabrera, 26', 'Alicante, 03003'],
     iconBg: 'bg-sky-50',
     iconColor: 'text-sky-600',
     action: { label: 'Ver en Maps', href: '#' },
@@ -15,10 +15,10 @@ const contactCards = [
   {
     icon: Phone,
     title: 'Teléfono',
-    lines: ['+34 93 456 78 90', '+34 600 123 456'],
+    lines: ['+34 965 130 696'],
     iconBg: 'bg-teal-50',
     iconColor: 'text-teal-600',
-    action: { label: 'Llamar ahora', href: 'tel:+34934567890' },
+    action: { label: 'Llamar ahora', href: 'tel:+34965130696' },
   },
   {
     icon: Mail,
@@ -114,9 +114,9 @@ export default function Contact() {
               <MapPin className="w-7 h-7 text-white fill-white/20" />
             </div>
             <p className="text-[#023E8A] font-bold text-lg mb-1">
-              Passeig del Mar Mediterrani, 42
+              C. Pintor Cabrera, 26
             </p>
-            <p className="text-[#0077B6] text-sm mb-5">Barcelona, 08003</p>
+            <p className="text-[#0077B6] text-sm mb-5">Alicante, 03003</p>
             <Button
               as="a"
               href="https://maps.google.com"

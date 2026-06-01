@@ -54,11 +54,11 @@ export default function Footer() {
             <div className="space-y-2.5 mb-6">
               <div className="flex items-center gap-2.5 text-gray-400 text-sm">
                 <MapPin className="w-4 h-4 text-[#00B4D8] flex-shrink-0" />
-                Passeig del Mar Mediterrani, 42, Barcelona 08003
+                C. Pintor Cabrera, 26, Alicante 03003
               </div>
               <div className="flex items-center gap-2.5 text-gray-400 text-sm">
                 <Phone className="w-4 h-4 text-[#00B4D8] flex-shrink-0" />
-                +34 93 456 78 90
+                +34 965 130 696
               </div>
               <div className="flex items-center gap-2.5 text-gray-400 text-sm">
                 <Mail className="w-4 h-4 text-[#00B4D8] flex-shrink-0" />
@@ -112,7 +112,7 @@ export default function Footer() {
           <p className="text-gray-500 text-sm flex items-center gap-1.5">
             Hecho con{' '}
             <Heart className="w-3.5 h-3.5 text-red-400 fill-red-400" />{' '}
-            en Barcelona
+            en Alicante
           </p>
         </div>
       </div>

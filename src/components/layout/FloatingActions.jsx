@@ -7,7 +7,7 @@ export default function FloatingActions({ showTop }) {
   return (
     <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-3">
       <a
-        href="https://wa.me/34934567890?text=Hola,%20me%20gustaría%20pedir%20información%20sobre%20sus%20servicios"
+        href="https://wa.me/34965130696?text=Hola,%20me%20gustaría%20pedir%20información%20sobre%20sus%20servicios"
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Contactar por WhatsApp"

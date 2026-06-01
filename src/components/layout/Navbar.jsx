@@ -1,15 +1,7 @@
 import { useState, useEffect } from 'react'
-import {
-  Navbar,
-  NavbarBrand,
-  NavbarContent,
-  NavbarItem,
-  NavbarMenuToggle,
-  NavbarMenu,
-  NavbarMenuItem,
-  Button,
-} from '@heroui/react'
-import { motion } from 'framer-motion'
+import { Button } from '@heroui/react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { Menu, X } from 'lucide-react'
 
 const navItems = [
   { label: 'Inicio', href: '#inicio' },
@@ -20,117 +12,153 @@ const navItems = [
 ]
 
 export default function AppNavbar() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 60)
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
+    const onScroll = () => setScrolled(window.scrollY > 60)
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
   return (
-    <Navbar
-      isMenuOpen={isMenuOpen}
-      onMenuOpenChange={setIsMenuOpen}
-      className={`fixed top-0 z-50 transition-all duration-500 ${
-        scrolled
-          ? 'bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-100'
-          : 'bg-transparent'
-      }`}
-      maxWidth="xl"
-      height="4.5rem"
-    >
-      <NavbarContent>
-        <NavbarMenuToggle
-          aria-label={isMenuOpen ? 'Cerrar menú' : 'Abrir menú'}
-          className={`sm:hidden ${scrolled ? 'text-[#0F172A]' : 'text-white'}`}
-        />
-        <NavbarBrand>
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
-            className="flex items-center gap-2.5"
+    <header className="fixed top-0 left-0 right-0 z-50">
+      <div
+        className={`transition-all duration-500 ${
+          scrolled
+            ? 'bg-white/96 backdrop-blur-lg shadow-sm border-b border-gray-100'
+            : 'bg-gradient-to-b from-black/40 to-transparent'
+        }`}
+      >
+        <div className="max-w-7xl mx-auto px-8 sm:px-12 lg:px-16">
+          <div
+            className={`flex items-center justify-between transition-all duration-500 ${
+              scrolled ? 'py-4' : 'py-6'
+            }`}
           >
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#0077B6] to-[#00B4D8] flex items-center justify-center shadow-md">
-              <span className="text-white font-bold text-sm tracking-tight">MM</span>
-            </div>
-            <div className="hidden sm:block">
-              <p className={`font-bold text-sm leading-tight transition-colors ${scrolled ? 'text-[#023E8A]' : 'text-white'}`}>
-                Mar Mediterráneo
-              </p>
-              <p className={`text-xs leading-tight transition-colors ${scrolled ? 'text-[#64748B]' : 'text-white/70'}`}>
-                Clínica Médica
-              </p>
-            </div>
-          </motion.div>
-        </NavbarBrand>
-      </NavbarContent>
-
-      <NavbarContent className="hidden sm:flex gap-1" justify="center">
-        {navItems.map((item, i) => (
-          <NavbarItem key={item.href}>
+            {/* Logo */}
             <motion.a
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 + i * 0.07, duration: 0.4 }}
-              href={item.href}
-              className={`text-sm font-medium px-3 py-1.5 rounded-lg transition-all hover:text-[#0077B6] hover:bg-[#0077B6]/5 ${
-                scrolled ? 'text-[#334155]' : 'text-white/90 hover:bg-white/10 hover:text-white'
-              }`}
+              href="#inicio"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5 }}
+              className="flex items-center gap-3 flex-shrink-0"
             >
-              {item.label}
+              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#0077B6] to-[#00B4D8] flex items-center justify-center shadow-md shadow-[#0077B6]/25">
+                <span className="text-white font-bold text-sm tracking-tight">MM</span>
+              </div>
+              <div className="hidden sm:block">
+                <p
+                  className="font-bold text-sm leading-tight transition-colors duration-300"
+                  style={scrolled
+                    ? { color: '#023E8A' }
+                    : { color: '#ffffff', textShadow: '0 1px 4px rgba(0,0,0,0.5)' }
+                  }
+                >
+                  Mar Mediterráneo
+                </p>
+                <p
+                  className="text-xs leading-tight transition-colors duration-300"
+                  style={scrolled
+                    ? { color: '#94A3B8' }
+                    : { color: 'rgba(255,255,255,0.85)', textShadow: '0 1px 3px rgba(0,0,0,0.4)' }
+                  }
+                >
+                  Clínica Médica
+                </p>
+              </div>
             </motion.a>
-          </NavbarItem>
-        ))}
-      </NavbarContent>
 
-      <NavbarContent justify="end">
-        <NavbarItem>
+            {/* Desktop nav links */}
+            <nav className="hidden md:flex items-center gap-1">
+              {navItems.map((item, i) => (
+                <motion.a
+                  key={item.href}
+                  href={item.href}
+                  initial={{ opacity: 0, y: -8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1 + i * 0.07, duration: 0.4 }}
+                  className="text-sm font-semibold px-4 py-2 rounded-lg transition-all duration-200"
+                  style={scrolled
+                    ? { color: '#334155' }
+                    : { color: '#ffffff', textShadow: '0 1px 4px rgba(0,0,0,0.6)' }
+                  }
+                >
+                  {item.label}
+                </motion.a>
+              ))}
+            </nav>
+
+            {/* Right: CTA + hamburger */}
+            <div className="flex items-center gap-3">
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+              >
+                <Button
+                  as="a"
+                  href="#citas"
+                  size="sm"
+                  className="hidden sm:flex bg-gradient-to-r from-[#0077B6] to-[#00B4D8] text-white font-semibold px-6 shadow-lg shadow-[#0077B6]/25 hover:shadow-[#0077B6]/40 hover:opacity-90 transition-all"
+                  radius="full"
+                >
+                  Reservar Cita
+                </Button>
+              </motion.div>
+
+              {/* Hamburger (mobile) */}
+              <button
+                onClick={() => setIsOpen(!isOpen)}
+                aria-label="Abrir menú"
+                className={`md:hidden p-2 rounded-lg transition-colors ${
+                  scrolled
+                    ? 'text-[#334155] hover:bg-gray-100'
+                    : 'text-white hover:bg-white/10'
+                }`}
+              >
+                {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile menu */}
+      <AnimatePresence>
+        {isOpen && (
           <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.2 }}
+            className="md:hidden bg-white/97 backdrop-blur-xl border-b border-gray-100 shadow-lg"
           >
-            <Button
-              as="a"
-              href="#citas"
-              size="sm"
-              className="bg-gradient-to-r from-[#0077B6] to-[#00B4D8] text-white font-semibold px-5 shadow-lg shadow-[#0077B6]/25 hover:shadow-[#0077B6]/40 hover:scale-105 transition-all"
-              radius="full"
-            >
-              Reservar Cita
-            </Button>
+            <div className="max-w-7xl mx-auto px-8 py-4 flex flex-col gap-1">
+              {navItems.map((item) => (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setIsOpen(false)}
+                  className="text-[#475569] font-medium py-3 px-3 rounded-lg hover:text-[#0077B6] hover:bg-[#F0F9FF] transition-colors border-b border-gray-50 last:border-0"
+                >
+                  {item.label}
+                </a>
+              ))}
+              <Button
+                as="a"
+                href="#citas"
+                onClick={() => setIsOpen(false)}
+                className="bg-gradient-to-r from-[#0077B6] to-[#00B4D8] text-white font-bold w-full mt-3"
+                radius="full"
+                size="lg"
+              >
+                Reservar Cita
+              </Button>
+            </div>
           </motion.div>
-        </NavbarItem>
-      </NavbarContent>
-
-      <NavbarMenu className="bg-white/97 backdrop-blur-xl pt-8 gap-1">
-        {navItems.map((item) => (
-          <NavbarMenuItem key={item.href}>
-            <a
-              href={item.href}
-              className="text-[#334155] text-base font-medium py-3 block hover:text-[#0077B6] transition-colors border-b border-gray-50"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              {item.label}
-            </a>
-          </NavbarMenuItem>
-        ))}
-        <NavbarMenuItem className="mt-4">
-          <Button
-            as="a"
-            href="#citas"
-            className="bg-gradient-to-r from-[#0077B6] to-[#00B4D8] text-white font-bold w-full"
-            radius="full"
-            size="lg"
-            onClick={() => setIsMenuOpen(false)}
-          >
-            Reservar Cita
-          </Button>
-        </NavbarMenuItem>
-      </NavbarMenu>
-    </Navbar>
+        )}
+      </AnimatePresence>
+    </header>
   )
 }

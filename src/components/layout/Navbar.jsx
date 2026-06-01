@@ -78,13 +78,21 @@ export default function AppNavbar() {
                   initial={{ opacity: 0, y: -8 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.1 + i * 0.07, duration: 0.4 }}
-                  className="text-sm font-semibold px-4 py-2 rounded-lg transition-all duration-200"
-                  style={scrolled
-                    ? { color: '#334155' }
-                    : { color: '#ffffff', textShadow: '0 1px 4px rgba(0,0,0,0.6)' }
+                  whileHover={{ y: -1 }}
+                  className={`relative text-sm font-semibold px-4 py-2 rounded-lg transition-all duration-200 group
+                    ${scrolled
+                      ? 'text-[#334155] hover:text-[#0077B6]'
+                      : 'hover:bg-white/10'
+                    }`}
+                  style={!scrolled
+                    ? { color: '#ffffff', textShadow: '0 1px 4px rgba(0,0,0,0.6)' }
+                    : undefined
                   }
                 >
                   {item.label}
+                  <span className={`absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 rounded-full transition-all duration-300 w-0 group-hover:w-4/5
+                    ${scrolled ? 'bg-[#0077B6]' : 'bg-white'}`}
+                  />
                 </motion.a>
               ))}
             </nav>

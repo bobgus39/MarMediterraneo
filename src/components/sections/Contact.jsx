@@ -10,7 +10,7 @@ const contactCards = [
     lines: ['C. Pintor Cabrera, 26', 'Alicante, 03003'],
     iconBg: 'bg-sky-50',
     iconColor: 'text-sky-600',
-    action: { label: 'Ver en Maps', href: '#' },
+    action: { label: 'Ver en Maps', href: 'https://www.google.com/maps/search/?api=1&query=C.+Pintor+Cabrera,+26,+03003+Alicante' },
   },
   {
     icon: Phone,
@@ -117,20 +117,17 @@ export default function Contact() {
               C. Pintor Cabrera, 26
             </p>
             <p className="text-[#0077B6] text-sm mb-5">Alicante, 03003</p>
-            <Button
-              as="a"
-              href="https://maps.google.com"
+            <a
+              href="https://www.google.com/maps/search/?api=1&query=C.+Pintor+Cabrera,+26,+03003+Alicante"
               target="_blank"
               rel="noopener noreferrer"
-              size="sm"
-              className="bg-[#0077B6] text-white font-semibold shadow-md"
-              radius="full"
+              className="bg-[#0077B6] hover:bg-[#005F8E] text-white text-sm font-semibold px-5 py-2 rounded-full shadow-md transition-colors duration-200"
             >
               Abrir en Google Maps
-            </Button>
+            </a>
           </div>
 
-          <div className="absolute inset-0 opacity-[0.06]"
+          <div className="absolute inset-0 opacity-[0.06] pointer-events-none"
             style={{
               backgroundImage: `
                 linear-gradient(#0077B6 1px, transparent 1px),
